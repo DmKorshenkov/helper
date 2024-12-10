@@ -18,6 +18,6 @@ func SplitTrimCheck(get string, n int) []string {
 
 func CheckErr(err error){
 	if err != nil {
-		log.Println(err.Errors())
+		log.Println(err.Error())
 	}
 }
