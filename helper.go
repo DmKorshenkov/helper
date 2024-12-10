@@ -2,7 +2,7 @@ package helper
 
 import (
 	"strings"
-	"fmt"
+	"log"
 )
 
 func SplitTrimCheck(get string, n int) []string {
