@@ -2,6 +2,7 @@ package helper
 
 import (
 	"strings"
+	"fmt"
 )
 
 func SplitTrimCheck(get string, n int) []string {
@@ -13,4 +14,10 @@ func SplitTrimCheck(get string, n int) []string {
 		return slice
 	}
 	return nil
+}
+
+func CheckErr(err error){
+	if err != nil {
+		log.Println(err.Errors())
+	}
 }
