@@ -1,0 +1,50 @@
+{
+	"геркулес": {
+		"weight": 100,
+		"proteins": 12,
+		"fats": 6,
+		"carbohydrate": 62,
+		"fiber": 6,
+		"calories": 350
+	},
+	"гречка": {
+		"weight": 100,
+		"proteins": 12,
+		"fats": 2,
+		"carbohydrate": 67,
+		"calories": 334
+	},
+	"курица": {
+		"weight": 100,
+		"proteins": 21,
+		"fats": 3,
+		"calories": 111
+	},
+	"макароны": {
+		"weight": 100,
+		"proteins": 12,
+		"fats": 1.3,
+		"carbohydrate": 70.5,
+		"calories": 341.7
+	},
+	"скумбрия": {
+		"weight": 100,
+		"proteins": 18,
+		"fats": 13,
+		"calories": 189
+	},
+	"сливмасло": {
+		"weight": 100,
+		"proteins": 0.6,
+		"fats": 82.3,
+		"carbohydrate": 0.8,
+		"calories": 746.3
+	},
+	"яйца": {
+		"weight": 100,
+		"proteins": 12.7,
+		"fats": 11.5,
+		"carbohydrate": 0.7,
+		"calories": 157.1
+	}
+}
