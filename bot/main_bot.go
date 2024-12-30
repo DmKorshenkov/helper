@@ -6,6 +6,7 @@ import (
 	"os"
 	"os/signal"
 
+	"github.com/DmKorshenkov/helper/bot/t"
 	"github.com/go-telegram/bot"
 	"github.com/go-telegram/bot/models"
 )
@@ -13,14 +14,12 @@ import (
 func main() {
 	ctx, cancel := signal.NotifyContext(context.Background(), os.Interrupt)
 	defer cancel()
-	os.Chdir("./DataBase")
 
 	opts := []bot.Option{
 		bot.WithDefaultHandler(handler),
 	}
-	os.Setenv("token", "...")
-
-	b, err := bot.New(os.Getenv("token"), opts...)
+	b, err := bot.New(t.Token(), opts...)
+	os.Chdir("./DataBase")
 	if err != nil {
 		// panics for the sake of simplicity.
 		// you should handle this error properly in your code.

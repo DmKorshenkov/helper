@@ -3,88 +3,80 @@ package ev
 import (
 	"fmt"
 	"math"
+
+	. "github.com/DmKorshenkov/helper/bot/weight"
 )
 
 type EnergyValue struct {
-	Weight float64 `json:"weight,omitempty"`
-	P      float64 `json:"proteins,omitempty"`
-	F      float64 `json:"fats,omitempty"`
-	Crb    float64 `json:"carbohydrate,omitempty"`
-	Fiber  float64 `json:"fiber,omitempty"`
-	Cal    float64 `json:"calories"`
+	P   float64 `json:"Prot,omitempty"`
+	F   float64 `json:"Fat,omitempty"`
+	C   float64 `json:"Carb,omitempty"`
+	Fb  float64 `json:"Fiber,omitempty"`
+	Cal float64 `json:"Cal,omitempty"`
+	W   Weight  `json:"W,omitempty"`
 }
 
-func NewEv(get ...float64) *EnergyValue {
-	var ev = new(EnergyValue)
-	ev.P = get[0]
-	ev.F = get[1]
-	ev.Crb = get[2]
-	if len(get) == 3 || len(get) == 4 {
-		ev.Weight = 100
-	}
-	if len(get) == 4 {
-		ev.Fiber = get[3]
-	}
-	if len(get) == 5 {
-		ev.Weight = get[4]
-	}
-	ev.SetCal()
-	//	ev.SetWeight(100)
-	//hello
-	return ev
+func NewEv() *EnergyValue {
+	return &EnergyValue{}
 }
-
-func SumEv(ev1 EnergyValue, ev2 EnergyValue) EnergyValue {
-	//var sum =
-	return EnergyValue{
-		P:     ev1.P + ev2.P,
-		F:     ev1.F + ev2.F,
-		Crb:   ev1.Crb + ev2.Crb,
-		Fiber: ev1.Fiber + ev2.Fiber,
-		Cal:   ev1.Cal + ev2.Cal,
-	}
+func SetEv(p float64, f float64, c float64, fb float64) *EnergyValue {
+	return &EnergyValue{P: p, F: f, C: c, Fb: fb, Cal: p*4 + f*9 + c*4 + fb*1.2, W: *SetW(100, "")}
 }
-
-func DiffEv(ev1 EnergyValue, ev2 EnergyValue) EnergyValue {
-	//var sum =
-	return EnergyValue{
-		P:     ev1.P - ev2.P,
-		F:     ev1.F - ev2.F,
-		Crb:   ev1.Crb - ev2.Crb,
-		Fiber: ev1.Fiber - ev2.Fiber,
-		Cal:   ev1.Cal - ev2.Cal,
-	}
+func (ev *EnergyValue) SetEv(p float64, f float64, c float64, fb float64) {
+	ev.P = p
+	ev.F = f
+	ev.C = c
+	ev.Fb = fb
+	ev.Cal = p*4 + f*9 + c*4 + fb*1.2
+	ev.W.SetWeight(100)
 }
-
-func (ev *EnergyValue) Str() string {
-	str := fmt.Sprintf("Вес - %v\nКоличество белков - %.3f\nКоличество жиров - %.3f\nКоличество углеводов - %.3f\nКоличество клетчатки - %v\nКалорийность - %v\n", ev.Weight, ev.P, ev.F, ev.Crb, ev.Fiber, ev.Cal)
-	return str
-}
-
-func (ev *EnergyValue) SetWeight(n float64) {
-	ev.Weight = n
-}
-
 func (ev *EnergyValue) SetOneGram() *EnergyValue {
-	ev.P = ev.P / ev.Weight
-	ev.F = ev.F / ev.Weight
-	ev.Crb = ev.Crb / ev.Weight
-	ev.Fiber = ev.Fiber / ev.Weight
-	ev.Weight = 1
-	ev.SetCal()
+	ev.W.Weight = 100
+	ev.P = ((ev.P) / ev.W.Weight)
+	ev.F = ((ev.F) / ev.W.Weight)
+	ev.C = ((ev.C) / ev.W.Weight)
+	ev.Fb = ((ev.Fb) / ev.W.Weight)
+	ev.Cal = ((ev.Cal) / ev.W.Weight)
+	ev.W.Weight = 1
+	//ev.Round()
 	return ev
 }
-
 func (ev *EnergyValue) SetPortion(weight float64) *EnergyValue {
-	//ev.SetPFC()
-	ev.Weight = weight
-	ev.P = math.Round(((ev.P)*ev.Weight)*100) / 100
-	ev.F = math.Round(((ev.F)*ev.Weight)*100) / 100
-	ev.Crb = math.Round(((ev.Crb)*ev.Weight)*100) / 100
-	ev.Fiber = math.Round(((ev.Fiber)*ev.Weight)*100) / 100
-	ev.SetCal()
+
+	ev.W.Weight = weight
+	ev.P = (ev.P) * ev.W.Weight
+	ev.F = (ev.F) * ev.W.Weight
+	ev.C = (ev.C) * ev.W.Weight
+	ev.Fb = (ev.Fb) * ev.W.Weight
+	ev.Cal = (ev.Cal) * ev.W.Weight
+	ev.Round()
 	return ev
 }
-func (ev *EnergyValue) SetCal() {
-	ev.Cal = math.Round((ev.P*4+ev.F*9+ev.Crb*4)*100) / 100
+func (ev *EnergyValue) Round() *EnergyValue {
+	//Round округлить
+	ev.P = math.Round((ev.P)*1000) / 1000
+	ev.F = math.Round((ev.F)*1000) / 1000
+	ev.C = math.Round((ev.C)*1000) / 1000
+	ev.Fb = math.Round((ev.Fb)*1000) / 1000
+	ev.Cal = math.Round((ev.Cal)*1000) / 1000
+	return ev
+}
+func (ev *EnergyValue) Str() string {
+	return fmt.Sprintf("prot - %f\nfats - %f\ncarb - %f\nfiber - %f\ncalories - %f\n%s\n", ev.P, ev.F, ev.C, ev.Fb, ev.Cal, ev.W.Str())
+}
+func (ev EnergyValue) SumEv(ev2 EnergyValue) EnergyValue {
+	ev.P += ev2.P
+	ev.F += ev2.F
+	ev.C += ev2.C
+	ev.Fb += ev2.Fb
+	ev.Cal += ev2.Cal
+	return ev
+}
+func (ev *EnergyValue) DiffEv(ev2 EnergyValue) EnergyValue {
+	ev.P -= ev2.P
+	ev.F -= ev2.F
+	ev.C -= ev2.C
+	ev.Fb -= ev2.Fb
+	ev.Cal -= ev2.Cal
+	return *ev
 }
