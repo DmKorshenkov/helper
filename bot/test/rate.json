@@ -1,0 +1,40 @@
+{
+	"24": {
+		"12": {
+			"27": [
+				{
+					"name object": "rate",
+					"energy value": {
+						"Prot": 90,
+						"Fat": 60,
+						"Carb": 225,
+						"Cal": 1800,
+						"W": {}
+					}
+				},
+				{
+					"name object": "rate",
+					"energy value": {
+						"Prot": 90,
+						"Fat": 60,
+						"Carb": 225,
+						"Cal": 1800,
+						"W": {}
+					}
+				},
+				{
+					"name object": "rate",
+					"energy value": {
+						"Prot": 90,
+						"Fat": 60,
+						"Carb": 225,
+						"Cal": 1800,
+						"W": {
+							"Weight": 75
+						}
+					}
+				}
+			]
+		}
+	}
+}

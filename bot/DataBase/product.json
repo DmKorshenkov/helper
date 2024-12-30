@@ -20,25 +20,12 @@
 		"fats": 3,
 		"calories": 111
 	},
-	"макароны": {
+	"хлеб": {
 		"weight": 100,
-		"proteins": 12,
-		"fats": 1.3,
-		"carbohydrate": 70.5,
-		"calories": 341.7
-	},
-	"скумбрия": {
-		"weight": 100,
-		"proteins": 18,
-		"fats": 13,
-		"calories": 189
-	},
-	"сливмасло": {
-		"weight": 100,
-		"proteins": 0.6,
-		"fats": 82.3,
-		"carbohydrate": 0.8,
-		"calories": 746.3
+		"proteins": 6.6,
+		"fats": 1.1,
+		"carbohydrate": 41,
+		"calories": 200.3
 	},
 	"яйца": {
 		"weight": 100,
