@@ -18,7 +18,7 @@ func main() {
 	opts := []bot.Option{
 		bot.WithDefaultHandler(handler),
 	}
-	os.Setenv("token", "7962376260:AAElZgEDL9BHRBeozjqsRG0fvvGn6ftqERc")
+	os.Setenv("token", "...")
 
 	b, err := bot.New(os.Getenv("token"), opts...)
 	if err != nil {
