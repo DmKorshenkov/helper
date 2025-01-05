@@ -11,11 +11,8 @@ import (
 )
 
 func main() {
-	os.Chdir(".././o")
-
-	products := opr.RemAllProd()
-	fmt.Println(products)
-
+	os.Chdir(".././opr")
+	//	os.Chdir(".././DataBase")
 }
 
 func mealTake(o2 []opr.Object) {

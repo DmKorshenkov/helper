@@ -26,12 +26,5 @@
 		"fats": 1.1,
 		"carbohydrate": 41,
 		"calories": 200.3
-	},
-	"яйца": {
-		"weight": 100,
-		"proteins": 12.7,
-		"fats": 11.5,
-		"carbohydrate": 0.7,
-		"calories": 157.1
 	}
 }

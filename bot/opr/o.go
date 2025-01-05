@@ -21,3 +21,11 @@ func (o *Object) SetO(name string, ev EnergyValue) {
 	o.Name = name
 	o.EnergyValue = ev
 }
+
+func (o *Object) SetName(name string) {
+	o.Name = name
+}
+
+func (o *Object) SetEv(ev EnergyValue) {
+	o.EnergyValue = ev
+}

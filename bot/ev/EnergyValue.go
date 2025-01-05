@@ -82,3 +82,15 @@ func (ev *EnergyValue) DiffEv(ev2 EnergyValue) EnergyValue {
 	ev3 := *ev
 	return ev3
 }
+
+func (ev *EnergyValue) DivEv() EnergyValue {
+	ev.P /= ev.W.Weight
+	ev.F /= ev.W.Weight
+	ev.C /= ev.W.Weight
+	if ev.Fb != 0 {
+		ev.Fb /= ev.W.Weight
+	}
+	ev.Cal /= ev.W.Weight
+	ev3 := *ev
+	return ev3
+}
