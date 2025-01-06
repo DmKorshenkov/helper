@@ -29,3 +29,10 @@ func (o *Object) SetName(name string) {
 func (o *Object) SetEv(ev EnergyValue) {
 	o.EnergyValue = ev
 }
+
+func (o *Object) A_weight(weight float64) *Object {
+	//fmt.Println(o.EnergyValue.W.Weight, "- before")
+	o.EnergyValue.W.Weight = weight
+	//fmt.Println(o.EnergyValue.W.Weight, "- after")
+	return o
+}
