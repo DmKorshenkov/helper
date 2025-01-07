@@ -2,9 +2,11 @@ package main
 
 import (
 	"context"
-	"log"
+	"fmt"
 	"os"
 	"os/signal"
+	"strconv"
+	"strings"
 
 	"github.com/DmKorshenkov/helper/bot/t"
 	"github.com/go-telegram/bot"
@@ -35,16 +37,20 @@ func handler(ctx context.Context, b *bot.Bot, update *models.Update) {
 	if update.Message == nil {
 		return
 	}
-
-	help(update.Message.Text)
+	b.SendMessage(ctx, &bot.SendMessageParams{
+		ChatID: update.Message.Chat.ID,
+		Text:   help(update.Message.Text),
+	})
 }
 
-func help(str string) {
-	f, _ := os.OpenFile("tmp.txt", os.O_RDWR, 0666)
+func help(msg string) string {
+	var a string
+	str := strings.Split(msg, "\n")
 
-	_, err := f.WriteString(str)
-	if err != nil {
-		log.Println(err.Error())
+	for _, s := range str {
+		fmt.Println(s)
+		fmt.Println()
 	}
-	f.Close()
+	a = strconv.Itoa(len(str))
+	return a
 }
