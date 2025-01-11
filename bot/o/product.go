@@ -1,17 +1,15 @@
-package opr
+package o
 
 import (
 	"encoding/json"
 	"os"
-
-	. "github.com/DmKorshenkov/helper/bot/ev"
 )
 
-func RemProd(prod ...Meal) {
+func RemProd(prod ...Food) {
 
 	f, _ := os.OpenFile("product.json", os.O_CREATE|os.O_RDWR, 0666)
 	data, _ := os.ReadFile(f.Name())
-	var tmp = make(map[string]EnergyValue)
+	var tmp = make(map[string]Ev)
 	if len(data) != 0 {
 		json.Unmarshal(data, &tmp)
 	}
@@ -24,8 +22,8 @@ func RemProd(prod ...Meal) {
 	f.Close()
 }
 
-func MemProd(name string) *EnergyValue {
-	var tmp = make(map[string]EnergyValue)
+func MemProd(name string) *Ev {
+	var tmp = make(map[string]Ev)
 	data, _ := os.ReadFile("product.json")
 	//	fmt.Println(string(data))
 	json.Unmarshal(data, &tmp)
@@ -37,15 +35,15 @@ func MemProd(name string) *EnergyValue {
 	}
 }
 
-func MemAllProd() []Meal {
-	var tmp = make(map[string]EnergyValue)
+func MemAllProd() []Food {
+	var tmp = make(map[string]Ev)
 	data, _ := os.ReadFile("product.json")
 	//	fmt.Println(string(data))
 	json.Unmarshal(data, &tmp)
-	var slProd = make([]Meal, 0, len(tmp))
+	var slProd = make([]Food, 0, len(tmp))
 
-	for name, ev := range tmp {
-		slProd = append(slProd, *SetO(name, ev))
+	for name, EnergyValue := range tmp {
+		slProd = append(slProd, *SetFood(name, EnergyValue))
 	}
 	return slProd
 }

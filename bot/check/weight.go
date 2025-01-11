@@ -5,11 +5,11 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/DmKorshenkov/helper/bot/o"
 	"github.com/DmKorshenkov/helper/bot/sl"
-	"github.com/DmKorshenkov/helper/bot/weight"
 )
 
-func CheckRemWeight(data string) *weight.Weight {
+func CheckRemWeight(data string) *o.Weight {
 	data = strings.Trim(data, "\n")
 	slice := strings.Split(data, " ")
 	for in := range slice {
@@ -23,7 +23,7 @@ func CheckRemWeight(data string) *weight.Weight {
 				return nil
 			}
 			info := slice[1]
-			return weight.SetW(w, info)
+			return o.SetW(w, info)
 		} else {
 			//CheckNumber== false; return nil
 			return nil
@@ -36,7 +36,7 @@ func CheckRemWeight(data string) *weight.Weight {
 				log.Println(err.Error())
 				return nil
 			}
-			return weight.SetW(w, "")
+			return o.SetW(w, "")
 		} else {
 			//CheckNumber== false; return nil
 			return nil

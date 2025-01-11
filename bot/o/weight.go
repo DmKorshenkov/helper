@@ -1,4 +1,4 @@
-package weight
+package o
 
 import (
 	"encoding/json"

@@ -1,22 +1,21 @@
 package memrem
 
-import (
-	"github.com/DmKorshenkov/helper/bot/opr"
-	"github.com/DmKorshenkov/helper/bot/weight"
-)
+import "fmt"
 
-type MR interface {
-	Mem(any)
+type RemMem interface {
 	Rem(any)
+	Mem(any)
 }
 
-type O struct{}
+type empty struct {
+}
 
-func (o *O)Rem(vr any) {
-	switch val := vr.(type){
-	case weight.Weight:
-			weight.RemWeight(val)
-	case opr.Prod:
-		val.
-	}
+func (omit *empty) Rem(v any) {
+	var empty empty
+	_ = empty
+	fmt.Println(v)
+}
+
+func (omit *empty) Mem(v any) {
+	fmt.Println(v)
 }

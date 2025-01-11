@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/DmKorshenkov/helper/bot/ev"
+	"github.com/DmKorshenkov/helper/bot/o"
 	"github.com/DmKorshenkov/helper/bot/ymd"
 )
 
@@ -14,9 +14,9 @@ type Prod struct {
 	Weight float64
 }
 
-func MemMealTake(o []Prod) {
-	var meal_take = make([]Meal, 0, 10)
-	for in, food := range o {
+func RemMealTake(p []Prod) {
+	var meal_take = make([]o.Food, 0, 10)
+	for in, food := range p {
 		//	fmt.Println(food)
 		if check := meal(food); check != nil {
 			meal_take[in] = *check
@@ -27,29 +27,29 @@ func MemMealTake(o []Prod) {
 	}
 	//все продукты в o
 	//fmt.Println(o)
-	sumev := ev.EnergyValue{}
+	sumev := o.Ev{}
 	for _, food := range meal_take {
 		sumev.SumEv(food.EnergyValue)
 	}
-	meal_take = append(meal_take, *SetO("сьел", sumev))
+	meal_take = append(meal_take, *o.SetFood("сьел", sumev))
 
-	rate := func() ev.EnergyValue {
-		rate := RemRate()
+	rate := func() o.Ev {
+		rate := o.MemRate()
 		rate.DiffEv(sumev)
-		MemRate(*rate)
+		o.RemRate(*rate)
 		return *rate
 	}()
-	meal_take = append(meal_take, *SetO("осталось", rate))
+	meal_take = append(meal_take, *o.SetFood("осталось", rate))
 	memMeal(meal_take)
 
 	//MemRate(RemRate().DiffEv(o[len(o)-1].EnergyValue))
 }
 
-func meal(food Prod) *Meal {
+func meal(food Prod) *o.Food {
 	//ищет продукт+возвращает его порцию
-	if f := MemProd(food.Name); f != nil {
+	if f := o.MemProd(food.Name); f != nil {
 		f.SetOneGram().SetPortion(food.Weight)
-		return (SetO(food.Name, *f))
+		return (o.SetFood(food.Name, *f))
 	} else {
 		fmt.Println("f==nil")
 		return nil
@@ -57,9 +57,9 @@ func meal(food Prod) *Meal {
 
 }
 
-func memMeal(e []Meal) {
+func memMeal(e []o.Food) {
 
-	var mp = make(map[int]map[int]map[int]map[int][]Meal)
+	var mp = make(map[int]map[int]map[int]map[int][]o.Food)
 	key := 1
 	data, _ := os.ReadFile("mealtake.json")
 	if len(data) != 0 {

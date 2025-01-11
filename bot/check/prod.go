@@ -5,12 +5,11 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/DmKorshenkov/helper/bot/ev"
-	"github.com/DmKorshenkov/helper/bot/opr"
+	"github.com/DmKorshenkov/helper/bot/o"
 	"github.com/DmKorshenkov/helper/bot/sl"
 )
 
-func CheckRemProd(data string) *opr.Meal {
+func CheckRemProd(data string) *o.Food {
 	data = strings.Trim(data, "\n")
 	slice := strings.Split(data, " ")
 	if len(slice) != 4 && len(slice) != 5 {
@@ -36,9 +35,9 @@ func CheckRemProd(data string) *opr.Meal {
 		slf64 = append(slf64, 0)
 	}
 	//fmt.Println(slice[0], slf64)
-	meal := ev.SetEv(slf64[0], slf64[1], slf64[2], slf64[3])
-	opr.SetO(slice[0], *meal)
-	return opr.SetO(slice[0], *meal)
+	meal := o.SetEv(slf64[0], slf64[1], slf64[2], slf64[3])
+	o.SetFood(slice[0], *meal)
+	return o.SetFood(slice[0], *meal)
 }
 
 func CheckMemProd(str string) {
