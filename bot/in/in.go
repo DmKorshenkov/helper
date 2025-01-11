@@ -3,6 +3,8 @@ package in
 import (
 	"fmt"
 	"strings"
+
+	"github.com/DmKorshenkov/helper/bot/check"
 )
 
 type I struct {
@@ -62,7 +64,7 @@ func (i *I) CheckKey() {
 		i.req += 3
 		return
 	case "вес":
-		i.req++
+		i.req += 1
 		return
 	case "продукт":
 		i.req += 2
@@ -89,57 +91,77 @@ func (i *I) PI() {
 
 func In(msg string) {
 	i := NewI()
-	sl := strings.Split(msg, "N")
-	sl2 := strings.SplitN(sl[0], " ", 2)
-	i.NewI(sl2[0], sl2[1])
+	message := strings.SplitN(msg, "N", 2)
+	cmdkey := strings.SplitN(message[0], " ", 2)
+	i.NewI(cmdkey[0], cmdkey[1])
 	i.PI()
 	i.Check()
 	if i.req == 0 {
 		fmt.Println("cmd/key!=true")
 		return
+	} else {
+		fmt.Println("cmd/key==true")
+	}
+
+	if len(message) > 1 {
+		i.data = message[1]
 	}
 	func(i I) {
 		switch i.req {
 		case 11:
-
-			//RemWeight
+			//RemWeight()
+			fmt.Println(i.req)
+			fmt.Println()
+			//проверит data и создаст weight
+			w := check.CheckRemWeight(i.data)
+			if w == nil {
+				fmt.Println("CheckRemWeight == nil")
+				//check == false
+				//return
+			} else {
+				fmt.Println(w)
+				//Rem()
+			}
 		case 21:
-
-			//MemWeight
+			//MemWeight()
+			fmt.Println(i.req)
+			fmt.Println()
+			//Check
+			//Mem()
 		case 12:
-
-			//RemProd
+			//RemProd()
+			fmt.Println(i.req)
+			fmt.Println()
+			meal := check.CheckRemProd(i.data)
+			if meal == nil {
+				fmt.Println("CheckRemProd == nil")
+				//return
+			} else {
+				fmt.Println(meal)
+				//Rem()
+			}
+			//Check
 		case 22:
-			//
-			//MemProd
-		case 13:
-
-			//RemMealTake
-		case 24:
-
 			//MemMealTake
-		}
-	}(*i)
-	func(i I) {
-		switch i.req {
-		case 11:
-
-			//RemWeight
-		case 21:
-
-			//MemWeight
-		case 12:
-
-			//RemProd
-		case 22:
-
-			//MemProd
+			fmt.Println(i.req)
+			//Check
+			//Mem()
 		case 13:
-
-			//RemMealTake
-		case 24:
-
-			//MemMealTake
+			fmt.Println(i.req)
+			fmt.Println()
+			meal_take := check.CheckRemProd(i.data)
+			if meal_take == nil {
+				fmt.Println("CheckRemMl == nil")
+				//return nil
+			} else {
+				fmt.Println(meal_take)
+				//Rem()
+			}
+			//Check
+		case 23:
+			fmt.Println(i.req)
+			//Check
+			//Mem()
 		}
 	}(*i)
 }

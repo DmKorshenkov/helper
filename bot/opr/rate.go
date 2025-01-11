@@ -8,7 +8,7 @@ import (
 	"github.com/DmKorshenkov/helper/bot/sl"
 )
 
-func SetRate(rate Object) {
+func SetRate(rate Meal) {
 	f, err := os.OpenFile("rate.json", os.O_RDWR, 0666)
 	sl.CheckErr(err)
 	f2, err := os.OpenFile("ratetmp.json", os.O_RDWR, 0666)

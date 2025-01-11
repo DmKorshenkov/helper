@@ -160,12 +160,10 @@ func SearchKeyInMap[K comparable, V comparable](key K, dic map[K]V) bool {
 	return false
 }
 
-func CheckNumber(slice ...string) bool {
-	for _, str := range slice {
-		for _, r := range str {
-			if !unicode.IsDigit(r) && r != '.' {
-				return false
-			}
+func CheckNumber(str string) bool {
+	for _, r := range str {
+		if !unicode.IsDigit(r) && r != '.' {
+			return false
 		}
 	}
 	return true

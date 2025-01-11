@@ -12,6 +12,9 @@ func ConvDateYMD(i int) (y int, m int, d int) {
 }
 
 func ConvDate_ymd(y, m, d int) (ymd int) {
+	if y < 0 || m < 0 || d < 0 {
+		return
+	}
 	return y*10000 + m*100 + d
 }
 

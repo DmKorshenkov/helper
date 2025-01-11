@@ -4,33 +4,33 @@ import (
 	. "github.com/DmKorshenkov/helper/bot/ev"
 )
 
-type Object struct {
+type Meal struct {
 	Name        string      `json:"Name"`
 	EnergyValue EnergyValue `json:"Energy Value"`
 }
 
-func NewO() *Object {
-	return &Object{}
+func NewO() *Meal {
+	return &Meal{}
 }
 
-func SetO(name string, ev EnergyValue) *Object {
-	return &Object{Name: name, EnergyValue: ev}
+func SetO(name string, ev EnergyValue) *Meal {
+	return &Meal{Name: name, EnergyValue: ev}
 }
 
-func (o *Object) SetO(name string, ev EnergyValue) {
+func (o *Meal) SetO(name string, ev EnergyValue) {
 	o.Name = name
 	o.EnergyValue = ev
 }
 
-func (o *Object) SetName(name string) {
+func (o *Meal) SetName(name string) {
 	o.Name = name
 }
 
-func (o *Object) SetEv(ev EnergyValue) {
+func (o *Meal) SetEv(ev EnergyValue) {
 	o.EnergyValue = ev
 }
 
-func (o *Object) A_weight(weight float64) *Object {
+func (o *Meal) A_weight(weight float64) *Meal {
 	//fmt.Println(o.EnergyValue.W.Weight, "- before")
 	o.EnergyValue.W.Weight = weight
 	//fmt.Println(o.EnergyValue.W.Weight, "- after")

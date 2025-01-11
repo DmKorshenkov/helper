@@ -7,15 +7,13 @@ import (
 	"github.com/DmKorshenkov/helper/bot/in"
 )
 
+// "githubcom/DmKorshenkov/helper/bot/in"
+type year map[int]int
+
 func main() {
-	os.Chdir(".././opr")
-	//	os.Chdir(".././DataBase")
-	/*msg := os.Args
-	if len(msg) > 1 {
-		In(msg[1:]...)
-	}*/
+	os.Chdir("//opr")
 	r := bufio.NewReader(os.Stdin)
 	i, _ := r.ReadString('\n')
 	in.In(i)
-	// In(msg[1:])
+
 }

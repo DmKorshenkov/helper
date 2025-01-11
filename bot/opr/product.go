@@ -7,7 +7,7 @@ import (
 	. "github.com/DmKorshenkov/helper/bot/ev"
 )
 
-func MemProd(prod ...Object) {
+func RemProd(prod ...Meal) {
 
 	f, _ := os.OpenFile("product.json", os.O_CREATE|os.O_RDWR, 0666)
 	data, _ := os.ReadFile(f.Name())
@@ -24,7 +24,7 @@ func MemProd(prod ...Object) {
 	f.Close()
 }
 
-func RemProd(name string) *EnergyValue {
+func MemProd(name string) *EnergyValue {
 	var tmp = make(map[string]EnergyValue)
 	data, _ := os.ReadFile("product.json")
 	//	fmt.Println(string(data))
@@ -37,12 +37,12 @@ func RemProd(name string) *EnergyValue {
 	}
 }
 
-func RemAllProd() []Object {
+func MemAllProd() []Meal {
 	var tmp = make(map[string]EnergyValue)
 	data, _ := os.ReadFile("product.json")
 	//	fmt.Println(string(data))
 	json.Unmarshal(data, &tmp)
-	var slProd = make([]Object, 0, len(tmp))
+	var slProd = make([]Meal, 0, len(tmp))
 
 	for name, ev := range tmp {
 		slProd = append(slProd, *SetO(name, ev))
