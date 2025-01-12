@@ -36,15 +36,26 @@ func (w *Weight) Str() string {
 	return fmt.Sprintf("weight - %v\ninfo - %v", w.Weight, w.Info)
 }
 
-func (w *Weight) RemWeight() {
-	f, _ := os.OpenFile("weight.json", os.O_CREATE|os.O_RDWR, 0666)
+func RemWeight(w Weight) {
+	f, err := os.OpenFile("weight.json", os.O_CREATE|os.O_RDWR, 0666)
+	if err != nil {
+		panic(err.Error())
+	}
 	mp := make(map[int]map[int]map[int]map[string][]Weight)
 	data, _ := os.ReadFile("weight.json")
 	if len(data) != 0 {
 		_ = json.Unmarshal(data, &mp)
+		fmt.Println(mp)
 	}
-	_ = ymd.ValInMap[string, Weight](mp, ymd.ConvDateNow(), w.Info, *w)
-	data, _ = json.MarshalIndent(w, "", "	")
-	_, _ = f.Write(data)
+	_ = ymd.ValInMap[string, Weight](mp, ymd.ConvDateNow(), w.Info, w)
+	fmt.Println(mp)
+	data, err = json.MarshalIndent(mp, "", "	")
+	if err != nil {
+		fmt.Println("!")
+	}
+	n, _ := f.Write(data)
+	if n != len(data) {
+		fmt.Println("n!=data")
+	}
 	_ = f.Close()
 }

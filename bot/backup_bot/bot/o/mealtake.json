@@ -1,0 +1,149 @@
+{
+	"25": {
+		"1": {
+			"4": {
+				"1": [
+					{
+						"Name": "геркулес",
+						"Energy Value": {
+							"Prot": 4.8,
+							"Fat": 2.4,
+							"Carb": 24.8,
+							"Cal": 140,
+							"W": {
+								"Weight": 40
+							}
+						}
+					},
+					{
+						"Name": "яйца",
+						"Energy Value": {
+							"Prot": 15.24,
+							"Fat": 13.8,
+							"Carb": 0.84,
+							"Cal": 188.52,
+							"W": {
+								"Weight": 120
+							}
+						}
+					},
+					{
+						"Name": "БЖУ",
+						"Energy Value": {
+							"Prot": 20.04,
+							"Fat": 16.2,
+							"Carb": 25.64,
+							"Cal": 328.52,
+							"W": {}
+						}
+					}
+				],
+				"2": [
+					{
+						"Name": "курица",
+						"Energy Value": {
+							"Prot": 10.5,
+							"Fat": 1.5,
+							"Cal": 55.5,
+							"W": {
+								"Weight": 50
+							}
+						}
+					},
+					{
+						"Name": "гречка",
+						"Energy Value": {
+							"Prot": 7.2,
+							"Fat": 1.2,
+							"Carb": 40.2,
+							"Cal": 200.4,
+							"W": {
+								"Weight": 60
+							}
+						}
+					},
+					{
+						"Name": "БЖУ",
+						"Energy Value": {
+							"Prot": 17.7,
+							"Fat": 2.7,
+							"Carb": 40.2,
+							"Cal": 255.9,
+							"W": {}
+						}
+					}
+				],
+				"3": [
+					{
+						"Name": "курица",
+						"Energy Value": {
+							"Prot": 21,
+							"Fat": 3,
+							"Cal": 111,
+							"W": {
+								"Weight": 100
+							}
+						}
+					},
+					{
+						"Name": "гречка",
+						"Energy Value": {
+							"Prot": 9.6,
+							"Fat": 1.6,
+							"Carb": 53.6,
+							"Cal": 267.2,
+							"W": {
+								"Weight": 80
+							}
+						}
+					},
+					{
+						"Name": "БЖУ",
+						"Energy Value": {
+							"Prot": 30.6,
+							"Fat": 4.6,
+							"Carb": 53.6,
+							"Cal": 378.2,
+							"W": {}
+						}
+					}
+				],
+				"4": [
+					{
+						"Name": "курица",
+						"Energy Value": {
+							"Prot": 21,
+							"Fat": 3,
+							"Cal": 111,
+							"W": {
+								"Weight": 100
+							}
+						}
+					},
+					{
+						"Name": "гречка",
+						"Energy Value": {
+							"Prot": 9.6,
+							"Fat": 1.6,
+							"Carb": 53.6,
+							"Cal": 267.2,
+							"W": {
+								"Weight": 80
+							}
+						}
+					},
+					{
+						"Name": "БЖУ",
+						"Energy Value": {
+							"Prot": 30.6,
+							"Fat": 4.6,
+							"Carb": 53.6,
+							"Cal": 378.2,
+							"W": {}
+						}
+					}
+				]
+			}
+		}
+	}
+}

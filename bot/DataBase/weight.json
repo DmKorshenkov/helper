@@ -1,0 +1,20 @@
+{
+	"25": {
+		"1": {
+			"12": {
+				"before_water": [
+					{
+						"Info": "before_water",
+						"Weight": 77.1
+					}
+				],
+				"morning": [
+					{
+						"Info": "morning",
+						"Weight": 77.1
+					}
+				]
+			}
+		}
+	}
+}

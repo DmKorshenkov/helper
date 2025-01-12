@@ -6,6 +6,7 @@ import (
 
 	"github.com/DmKorshenkov/helper/bot/check"
 	"github.com/DmKorshenkov/helper/bot/mr"
+	"github.com/DmKorshenkov/helper/bot/o"
 )
 
 type I struct {
@@ -96,7 +97,11 @@ func In(msg string) {
 
 	message := strings.SplitN(msg, "\n", 2)
 	cmdkey := strings.SplitN(message[0], " ", 2)
-	i.NewI(cmdkey[0], cmdkey[1])
+	if len(cmdkey) == 2 {
+		i.NewI(cmdkey[0], cmdkey[1])
+	} else {
+		return
+	}
 	i.PI()
 	i.Check()
 	if i.req == 0 {
@@ -112,39 +117,34 @@ func In(msg string) {
 	func(i I) {
 		switch i.req {
 		case 11:
-			//RemWeight()
 			fmt.Println(i.req)
 			fmt.Println()
-			//проверит data и создаст weight
-			w := check.CheckRemWeight(i.data)
-			if w == nil {
+			weight := check.CheckRemWeight(i.data)
+			if weight == nil {
 				fmt.Println("CheckRemWeight == nil")
 				//check == false
 				//return
 			} else {
-				mr.Rem(w)
-				fmt.Println(w)
+				mr.Rem(*weight)
 				//Rem()
 			}
 		case 21:
-			//MemWeight()
 			fmt.Println(i.req)
 			fmt.Println()
 			//Check
-			//Mem()
+			//MemWeight()
 		case 12:
-			//RemProd()
 			fmt.Println(i.req)
 			fmt.Println()
-			meal := check.CheckRemProd(i.data)
-			if meal == nil {
+			food := check.CheckRemProd(i.data)
+			if food == nil {
 				fmt.Println("CheckRemProd == nil")
+				//check == false
 				//return
 			} else {
-				fmt.Println(meal)
+				o.RemProd(food...)
 				//Rem()
 			}
-			//Check
 		case 22:
 			//MemMealTake
 			fmt.Println(i.req)

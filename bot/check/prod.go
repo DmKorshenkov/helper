@@ -9,7 +9,18 @@ import (
 	"github.com/DmKorshenkov/helper/bot/sl"
 )
 
-func CheckRemProd(data string) *o.Food {
+func CheckRemProd(data string) (foods []o.Food) {
+	sl := strings.Split(data, "\n")
+	for _, val := range sl {
+		if food := help(val); food != nil {
+			foods = append(foods, *food)
+		}
+	}
+
+	return foods
+}
+
+func help(data string) *o.Food {
 	data = strings.Trim(data, "\n")
 	slice := strings.Split(data, " ")
 	if len(slice) != 4 && len(slice) != 5 {
@@ -36,6 +47,7 @@ func CheckRemProd(data string) *o.Food {
 	}
 	//fmt.Println(slice[0], slf64)
 	meal := o.SetEv(slf64[0], slf64[1], slf64[2], slf64[3])
+	meal.Round()
 	o.SetFood(slice[0], *meal)
 	return o.SetFood(slice[0], *meal)
 }

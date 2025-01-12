@@ -1,19 +1,11 @@
 package main
 
-import (
-	"bufio"
-	"os"
-
-	"github.com/DmKorshenkov/helper/bot/in"
-)
+import "os"
 
 // "githubcom/DmKorshenkov/helper/bot/in"
 type year map[int]int
 
 func main() {
-	os.Chdir("../DataBase")
-	r := bufio.NewReader(os.Stdin)
-	i, _ := r.ReadString('\n')
-	in.In(i)
-
+	os.Chdir("./DataBase")
+	os.OpenFile("tmp.json", os.O_CREATE|os.O_RDWR, 0666)
 }
