@@ -1,4 +1,4 @@
-package opr
+package fnc
 
 import (
 	"encoding/json"
@@ -46,7 +46,7 @@ func RemMealTake(p []Prod) {
 }
 
 func meal(food Prod) *o.Food {
-	//ищет продукт+возвращает его порцию
+	//ищет продукт+возвращает его БЖУ по весу порции
 	if f := o.MemProd(food.Name); f != nil {
 		f.SetOneGram().SetPortion(food.Weight)
 		return (o.SetFood(food.Name, *f))
@@ -58,10 +58,10 @@ func meal(food Prod) *o.Food {
 }
 
 func memMeal(e []o.Food) {
-
+	f, _ := os.OpenFile("meal_take.json", os.O_CREATE|os.O_RDWR, 0666)
 	var mp = make(map[int]map[int]map[int]map[int][]o.Food)
 	key := 1
-	data, _ := os.ReadFile("mealtake.json")
+	data, _ := os.ReadFile("meal_take.json")
 	if len(data) != 0 {
 		json.Unmarshal(data, &mp)
 
@@ -80,8 +80,6 @@ func memMeal(e []o.Food) {
 		}
 		//	fmt.Println("data==0")
 	}
-
-	f, _ := os.OpenFile("mealtake.json", os.O_CREATE|os.O_RDWR, 0666)
 
 	data, _ = json.MarshalIndent(mp, "", "	")
 	_, _ = f.Write(data)

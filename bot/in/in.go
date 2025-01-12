@@ -5,6 +5,7 @@ import (
 	"strings"
 
 	"github.com/DmKorshenkov/helper/bot/check"
+	"github.com/DmKorshenkov/helper/bot/mr"
 )
 
 type I struct {
@@ -90,8 +91,10 @@ func (i *I) PI() {
 }
 
 func In(msg string) {
-	i := NewI()
-	message := strings.SplitN(msg, "N", 2)
+	var i = NewI()
+	var mr mr.RemMem
+
+	message := strings.SplitN(msg, "\n", 2)
 	cmdkey := strings.SplitN(message[0], " ", 2)
 	i.NewI(cmdkey[0], cmdkey[1])
 	i.PI()
@@ -119,6 +122,7 @@ func In(msg string) {
 				//check == false
 				//return
 			} else {
+				mr.Rem(w)
 				fmt.Println(w)
 				//Rem()
 			}

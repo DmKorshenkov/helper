@@ -30,8 +30,8 @@ func (rate *Rate) SetRate(name string, p, f, c, fb, w float64) bool {
 }
 
 func (rate Rate) setRate() bool {
-	f_rate, _ := os.OpenFile("rate.json", os.O_RDWR, 0666)
-	f_rate_tmp, _ := os.OpenFile("ratetmp.json", os.O_RDWR, 0666)
+	f_rate, _ := os.OpenFile("rate.json", os.O_CREATE|os.O_RDWR, 0666)
+	f_rate_tmp, _ := os.OpenFile("ratetmp.json", os.O_CREATE|os.O_RDWR, 0666)
 
 	data, _ := json.MarshalIndent(rate, "", "	")
 	_, _ = f_rate.Write(data)

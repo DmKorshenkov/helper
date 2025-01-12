@@ -11,7 +11,7 @@ import (
 type year map[int]int
 
 func main() {
-	os.Chdir("//opr")
+	os.Chdir("../DataBase")
 	r := bufio.NewReader(os.Stdin)
 	i, _ := r.ReadString('\n')
 	in.In(i)

@@ -5,9 +5,8 @@ import (
 	"fmt"
 	"os"
 	"os/signal"
-	"strconv"
-	"strings"
 
+	"github.com/DmKorshenkov/helper/bot/in"
 	"github.com/DmKorshenkov/helper/bot/t"
 	"github.com/go-telegram/bot"
 	"github.com/go-telegram/bot/models"
@@ -21,7 +20,10 @@ func main() {
 		bot.WithDefaultHandler(handler),
 	}
 	b, err := bot.New(t.Token(), opts...)
-	os.Chdir("./DataBase")
+	err = os.Chdir("../")
+	if err != nil {
+		fmt.Println("!")
+	}
 	if err != nil {
 		// panics for the sake of simplicity.
 		// you should handle this error properly in your code.
@@ -37,20 +39,14 @@ func handler(ctx context.Context, b *bot.Bot, update *models.Update) {
 	if update.Message == nil {
 		return
 	}
-	b.SendMessage(ctx, &bot.SendMessageParams{
-		ChatID: update.Message.Chat.ID,
-		Text:   help(update.Message.Text),
-	})
+	helper()
+	in.In(update.Message.Text)
 }
 
-func help(msg string) string {
-	var a string
-	str := strings.Split(msg, "\n")
-
-	for _, s := range str {
-		fmt.Println(s)
-		fmt.Println()
+func helper() {
+	f, err := os.Create("test.json")
+	if err != nil {
+		fmt.Println("s")
 	}
-	a = strconv.Itoa(len(str))
-	return a
+	f.Close()
 }
