@@ -5,14 +5,12 @@ import (
 	"strings"
 
 	"github.com/DmKorshenkov/helper/bot/check"
-	"github.com/DmKorshenkov/helper/bot/mr"
-	"github.com/DmKorshenkov/helper/bot/o"
 )
 
 type I struct {
 	cmd  string
 	key  string
-	req  uint8
+	req  int32
 	data string
 }
 
@@ -32,22 +30,22 @@ func (i *I) NewI(cmd string, key string) *I {
 func (i *I) CheckCmd() {
 	switch i.cmd {
 	case "rem":
-		i.req = 10
+		i.req = 'r'
 		return
 	case "mem":
-		i.req = 20
+		i.req = 'm'
 		return
 	case "cal":
-		i.req = 30
+		i.req = 'c'
 		return
 	case "запомни":
-		i.req = 10
+		i.req = 'r'
 		return
 	case "вспомни":
-		i.req = 20
+		i.req = 'm'
 		return
 	case "калькулятор":
-		i.req = 30
+		i.req = 'c'
 		return
 	default:
 		return
@@ -57,25 +55,28 @@ func (i *I) CheckCmd() {
 func (i *I) CheckKey() {
 	switch i.key {
 	case "weight":
-		i.req += 1
+		i.req += 'w'
 		return
 	case "prod":
-		i.req += 2
+		i.req += 'f'
+		return
+	case "rate":
+		i.req += 'R'
 		return
 	case "meal take":
-		i.req += 3
-		return
-	case "бжу":
-		i.req += 4
+		i.req += 'm'
 		return
 	case "вес":
-		i.req += 1
+		i.req += 'w'
 		return
 	case "продукт":
-		i.req += 2
+		i.req += 'f'
+		return
+	case "норму бжу":
+		i.req += 'R'
 		return
 	case "прием пищи":
-		i.req += 3
+		i.req += 'm'
 		return
 	default:
 		i.req = 0
@@ -94,93 +95,57 @@ func (i *I) PI() {
 	fmt.Println("i.key = ", i.key)
 }
 
-func In(msg string) {
+func In(msg string) string {
 	var i = NewI()
-	var mr mr.RemMem
 
-	message := strings.SplitN(msg, "\n", 2)
-	cmdkey := strings.SplitN(message[0], " ", 2)
-	if len(cmdkey) == 2 {
-		i.NewI(cmdkey[0], cmdkey[1])
-	} else {
-		return
+	checK, got := func() ([]string, []string) {
+		get := strings.SplitN(msg, "\n", 2)
+		cmdkey := strings.SplitN(get[0], " ", 2)
+		return cmdkey, get
+	}()
+	if len(checK) != 2 {
+		return "Упс)\nНеверное количество ключевых слов в команде.\n"
 	}
+	i.NewI(checK[0], checK[1])
 	i.PI()
 	i.Check()
 	if i.req == 0 {
-		fmt.Println("cmd/key!=true")
-		return
+		return "cmd/key!=true\n"
 	} else {
 		fmt.Println("cmd/key==true")
 	}
 
-	if len(message) > 1 {
-		i.data = message[1]
+	if len(got) > 1 {
+		i.data = got[1]
 	}
 	func(i I) {
 		switch i.req {
-		case 11:
-			fmt.Println(i.req)
-			fmt.Println()
-			weight := check.CheckRemWeight(i.data)
-			if weight == nil {
-				fmt.Println("CheckRemWeight == nil")
-				//check == false
-				//return
-			} else {
-				mr.Rem(*weight)
-				//Rem()
-			}
-		case 21:
-			fmt.Println(i.req)
-			fmt.Println()
-			//Check
-			//MemWeight()
-		case 12:
-			fmt.Println(i.req)
-			fmt.Println()
-			food := check.CheckRemFood(i.data)
-			if food == nil {
-				fmt.Println("CheckRemProd == nil")
-				//check == false
-				//return
-			} else {
-				o.RemFood(food...)
-				//Rem()
-			}
-		case 14:
-			//RemRate
-			rate := check.CheckRate(i.data)
-			if rate == nil {
-				fmt.Println("CheckRate==nil")
-				//check false
-				//return
-			} else {
-				o.RemRate(*rate)
-			}
-		case 22:
-			//MemMealTake
-			fmt.Println(i.req)
-			//Check
-			//Mem()
-		case 13:
-			fmt.Println(i.req)
-			fmt.Println()
-			meal_take := check.Prod(i.data)
-			if meal_take == nil {
-				fmt.Println("CheckRemMl == nil")
-				//return nil
-			} else {
-				fmt.Println(meal_take)
-				//Rem()
-			}
-			//Check
-		case 23:
-			fmt.Println(i.req)
-			//Check
-			//Mem()
+		case 'r' + 'w':
+			//rem weight
+			fmt.Println("!")
+			weight := check.RemWeight(i.data)
+			_ = weight
+		case 'm' + 'w':
+			// mem weight
+
+		case 'r' + 'f':
+			//rem prod/food
+
+		case 'r' + 'R':
+			//rem rate
+
+		case 'm' + 'R':
+			//mem rate
+
+		case 'r' + 'm':
+			//rem meal
+
+		case 'm' + 'm':
+			//mem meal
+
 		}
 	}(*i)
+	return "in.In(msg) - mission complete, bro)"
 }
 
 func helpTrim(str string) string {

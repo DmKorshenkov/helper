@@ -10,10 +10,13 @@ import (
 )
 
 func RemWeight(data string) *o.Weight {
-	data = strings.Trim(data, "\n")
+
 	slice := strings.Split(data, " ")
 	for in := range slice {
 		slice[in] = strings.ToLower(strings.TrimSpace(slice[in]))
+		if in == 0 && !sl.CheckNumber(slice[in]) {
+			return nil
+		}
 	}
 	if len(slice) == 2 {
 		if sl.CheckNumber(slice[0]) {
