@@ -9,7 +9,7 @@ import (
 	"github.com/DmKorshenkov/helper/bot/sl"
 )
 
-func CheckRemWeight(data string) *o.Weight {
+func RemWeight(data string) *o.Weight {
 	data = strings.Trim(data, "\n")
 	slice := strings.Split(data, " ")
 	for in := range slice {

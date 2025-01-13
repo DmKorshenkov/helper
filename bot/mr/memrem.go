@@ -17,7 +17,9 @@ func (omit *RemMem) Rem(v any) {
 		o.RemWeight(val)
 	case o.Food:
 		fmt.Println("Rem type Food")
-		o.RemProd(val)
+		o.RemFood(val)
+	case o.Rate:
+		o.RemRate(val)
 	default:
 		fmt.Println("not type weight/food")
 	}

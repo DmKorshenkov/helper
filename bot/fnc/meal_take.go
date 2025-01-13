@@ -9,59 +9,46 @@ import (
 	"github.com/DmKorshenkov/helper/bot/ymd"
 )
 
-type Prod struct {
-	Name   string
-	Weight float64
-}
+func MealTake(p ...o.Prod) {
 
-func RemMealTake(p []Prod) {
-	var meal_take = make([]o.Food, 0, 10)
-	for in, food := range p {
-		//	fmt.Println(food)
-		if check := meal(food); check != nil {
-			meal_take[in] = *check
-		} else {
-			fmt.Println("check==nil")
-		}
-
+	var mealTake = make([]o.Food, 0, len(p))
+	var sumev = o.Ev{}
+	//
+	for _, food := range p {
+		//
+		mealTake = append(mealTake, getFood(food))
 	}
-	//все продукты в o
-	//fmt.Println(o)
-	sumev := o.Ev{}
-	for _, food := range meal_take {
+	//
+	//
+	for _, food := range mealTake {
 		sumev.SumEv(food.EnergyValue)
 	}
-	meal_take = append(meal_take, *o.SetFood("сьел", sumev))
-
-	rate := func() o.Ev {
-		rate := o.MemRate()
+	mealTake = append(mealTake, *o.SetFood("БЖУ", sumev))
+	//RemRateDay
+	func() {
+		rate := *o.MemRate()
 		rate.DiffEv(sumev)
-		o.RemRate(*rate)
-		return *rate
+		rate.Round()
+		fmt.Println(rate)
+		//o.RemRateDay(rate)
 	}()
-	meal_take = append(meal_take, *o.SetFood("осталось", rate))
-	memMeal(meal_take)
-
-	//MemRate(RemRate().DiffEv(o[len(o)-1].EnergyValue))
+	fmt.Println(mealTake)
+	//remMeal(mealTake)
 }
 
-func meal(food Prod) *o.Food {
-	//ищет продукт+возвращает его БЖУ по весу порции
-	if f := o.MemProd(food.Name); f != nil {
-		f.SetOneGram().SetPortion(food.Weight)
-		return (o.SetFood(food.Name, *f))
-	} else {
-		fmt.Println("f==nil")
-		return nil
-	}
+func getFood(food o.Prod) o.Food {
+	// get food
+	f := o.MemFood(food.Name)
+	f.SetOneGram().SetPortion(food.Weight)
+	return *(o.SetFood(food.Name, *f))
 
 }
 
-func memMeal(e []o.Food) {
-	f, _ := os.OpenFile("meal_take.json", os.O_CREATE|os.O_RDWR, 0666)
+func remMeal(e []o.Food) {
+	f, _ := os.OpenFile("mealTake.json", os.O_CREATE|os.O_RDWR, 0666)
 	var mp = make(map[int]map[int]map[int]map[int][]o.Food)
 	key := 1
-	data, _ := os.ReadFile("meal_take.json")
+	data, _ := os.ReadFile("mealTake.json")
 	if len(data) != 0 {
 		json.Unmarshal(data, &mp)
 
@@ -84,5 +71,4 @@ func memMeal(e []o.Food) {
 	data, _ = json.MarshalIndent(mp, "", "	")
 	_, _ = f.Write(data)
 	_ = f.Close()
-
 }

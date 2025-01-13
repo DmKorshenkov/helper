@@ -65,6 +65,9 @@ func (i *I) CheckKey() {
 	case "meal take":
 		i.req += 3
 		return
+	case "бжу":
+		i.req += 4
+		return
 	case "вес":
 		i.req += 1
 		return
@@ -136,14 +139,24 @@ func In(msg string) {
 		case 12:
 			fmt.Println(i.req)
 			fmt.Println()
-			food := check.CheckRemProd(i.data)
+			food := check.CheckRemFood(i.data)
 			if food == nil {
 				fmt.Println("CheckRemProd == nil")
 				//check == false
 				//return
 			} else {
-				o.RemProd(food...)
+				o.RemFood(food...)
 				//Rem()
+			}
+		case 14:
+			//RemRate
+			rate := check.CheckRate(i.data)
+			if rate == nil {
+				fmt.Println("CheckRate==nil")
+				//check false
+				//return
+			} else {
+				o.RemRate(*rate)
 			}
 		case 22:
 			//MemMealTake
@@ -153,7 +166,7 @@ func In(msg string) {
 		case 13:
 			fmt.Println(i.req)
 			fmt.Println()
-			meal_take := check.CheckRemProd(i.data)
+			meal_take := check.Prod(i.data)
 			if meal_take == nil {
 				fmt.Println("CheckRemMl == nil")
 				//return nil

@@ -20,7 +20,7 @@ func NewRate(ev Ev) *Rate {
 	return rate
 }
 
-func Rem_Rate(rate Rate) bool {
+func RemRate(rate Rate) bool {
 	if ok := rate.setRate(); !ok {
 		//check err return true/false
 		return false
@@ -43,7 +43,7 @@ func (rate Rate) setRate() bool {
 	return err != nil
 }
 
-func RemRate(rate Ev) {
+func RemRateDay(rate Ev) {
 	f, err := os.OpenFile("ratetmp.json", os.O_WRONLY|os.O_TRUNC, 0666)
 	sl.CheckErr(err)
 	data, _ := json.MarshalIndent(rate, "", "	")
@@ -55,7 +55,7 @@ func MemRate() *Ev {
 	data, err := os.ReadFile("ratetmp.json")
 	sl.CheckErr(err)
 	var rate Rate
-	sl.CheckErr(json.Unmarshal(data, &rate))
+	sl.CheckErr(json.Unmarshal(data, &rate.EnergyValue))
 	return &rate.EnergyValue
 }
 

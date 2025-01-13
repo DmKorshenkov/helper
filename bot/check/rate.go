@@ -7,7 +7,7 @@ import (
 	"github.com/DmKorshenkov/helper/bot/sl"
 )
 
-func CheckRate(data string) *o.Rate {
+func Rate(data string) *o.Rate {
 	sl_rate := strings.Split(data, " ")
 	if len(sl_rate) != 4 {
 		return nil
