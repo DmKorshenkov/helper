@@ -3,6 +3,7 @@ package o
 import (
 	"encoding/json"
 	"os"
+	"strconv"
 
 	"github.com/DmKorshenkov/helper/bot/sl"
 )
@@ -12,16 +13,14 @@ type Rate struct {
 	EnergyValue Ev
 }
 
-func NewRate() Rate {
-	return Rate{}
+func NewRate(ev Ev) *Rate {
+	var rate = new(Rate)
+	rate.Name = strconv.Itoa(int(ev.W.Weight))
+	rate.EnergyValue = ev
+	return rate
 }
 
-func (rate *Rate) SetRate(name string, p, f, c, fb, w float64) bool {
-	ev := NewEv()
-	ev.SetEv(p, f, c, fb)
-	_ = ev.SetPortion(w)
-	rate.Name = name
-	rate.EnergyValue = *ev
+func Rem_Rate(rate Rate) bool {
 	if ok := rate.setRate(); !ok {
 		//check err return true/false
 		return false
@@ -62,7 +61,7 @@ func MemRate() *Ev {
 
 func BackRate() {
 	data, _ := os.ReadFile("rate.json")
-	var tmp = NewRate()
+	var tmp Rate
 	json.Unmarshal(data, &tmp)
 	data, _ = json.MarshalIndent(tmp.EnergyValue, "", "	")
 

@@ -10,7 +10,12 @@ import (
 // type sliceType[S any] []S
 // type k[K comparable, V any] map[K]V
 func main() {
-	helper()
+	var f float64
+	f = 71.5
+	var i int
+	i = int(f)
+	fmt.Println(i)
+	// helper()
 }
 
 func helper() {

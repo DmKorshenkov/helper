@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
-	"math"
 	"os"
 	"strconv"
 	"strings"
@@ -175,7 +174,6 @@ func ParF(get string) (f64 float64) {
 		log.Println(err.Error())
 	}
 	//	f64 = f64 * 100 / 100
-	f64 = math.Round(f64*100) / 100
 	return f64
 }
 
