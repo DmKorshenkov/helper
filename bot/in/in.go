@@ -5,6 +5,8 @@ import (
 	"strings"
 
 	"github.com/DmKorshenkov/helper/bot/check"
+	"github.com/DmKorshenkov/helper/bot/fnc"
+	"github.com/DmKorshenkov/helper/bot/o"
 )
 
 type I struct {
@@ -126,7 +128,7 @@ func In(msg string) string {
 		if weight == nil {
 			return "(check.RemWeight==nil)\nОдин раз - не пидорас.\nНо, Братан, ты пидр!\nДавай! Попробуй еще раз!"
 		} else {
-			//RemWeight(weight)
+			o.RemWeight(*weight)
 		}
 	case 'm' + 'w':
 		// mem weight
@@ -137,7 +139,7 @@ func In(msg string) string {
 		if len(food) == 0 {
 			return "(check.RemFood==len_0)\nОдин раз - не пидорас.\nНо, Братан, ты пидр!\nДавай! Попробуй еще раз!"
 		} else {
-			//RemFood(food)
+			o.RemFood(food...)
 		}
 	case 'r' + 'R':
 		//
@@ -145,7 +147,7 @@ func In(msg string) string {
 		if rate == nil {
 			return "(check.Rate==nil)\nОдин раз - не пидорас.\nНо, Братан, ты пидр!\nДавай! Попробуй еще раз!"
 		} else {
-			//RemRate(rate)
+			o.RemRate(*rate)
 		}
 
 	case 'm' + 'R':
@@ -157,7 +159,8 @@ func In(msg string) string {
 		if len(prod) == 0 {
 			return "(check.Prod==len_0)\nОдин раз - не пидорас.\nНо, Братан, ты пидр!\nДавай! Попробуй еще раз!"
 		} else {
-			//RemMealTake
+			meal := fnc.MealTake(prod...)
+			fnc.RemMeal(meal)
 		}
 	case 'm' + 'm':
 		//mem meal

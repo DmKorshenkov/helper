@@ -9,7 +9,7 @@ import (
 	"github.com/DmKorshenkov/helper/bot/ymd"
 )
 
-func MealTake(p ...o.Prod) {
+func MealTake(p ...o.Prod) []o.Food {
 
 	var mealTake = make([]o.Food, 0, len(p))
 	var sumev = o.Ev{}
@@ -32,8 +32,7 @@ func MealTake(p ...o.Prod) {
 		fmt.Println(rate)
 		//o.RemRateDay(rate)
 	}()
-	fmt.Println(mealTake)
-	//remMeal(mealTake)
+	return mealTake
 }
 
 func getFood(food o.Prod) o.Food {
@@ -44,7 +43,7 @@ func getFood(food o.Prod) o.Food {
 
 }
 
-func remMeal(e []o.Food) {
+func RemMeal(e []o.Food) {
 	f, _ := os.OpenFile("mealTake.json", os.O_CREATE|os.O_RDWR, 0666)
 	var mp = make(map[int]map[int]map[int]map[int][]o.Food)
 	key := 1

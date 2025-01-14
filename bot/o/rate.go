@@ -58,15 +58,3 @@ func MemRate() *Ev {
 	sl.CheckErr(json.Unmarshal(data, &rate.EnergyValue))
 	return &rate.EnergyValue
 }
-
-func BackRate() {
-	data, _ := os.ReadFile("rate.json")
-	var tmp Rate
-	json.Unmarshal(data, &tmp)
-	data, _ = json.MarshalIndent(tmp.EnergyValue, "", "	")
-
-	f, _ := os.OpenFile("ratetmp.json", os.O_WRONLY|os.O_TRUNC, 0666)
-
-	_, _ = f.Write(data)
-	_ = f.Close()
-}

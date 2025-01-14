@@ -1,10 +1,10 @@
 package main
 
 import (
-	"fmt"
 	"os"
 
 	"github.com/DmKorshenkov/helper/bot/check"
+	"github.com/DmKorshenkov/helper/bot/o"
 )
 
 // "githubcom/DmKorshenkov/helper/bot/in"
@@ -14,11 +14,9 @@ type year map[int]int
 func main() {
 	//	os.OpenFile("tmp.json", os.O_CREATE|os.O_RDWR, 0666)
 	os.Chdir(".././DataBase")
-	//check Weight
-	var weight = check.RemWeight("77.1m morning")
-	fmt.Println(weight)
-
-	var food = check.RemFood("курица 21 3 0")
-	fmt.Println(food)
-
+	p := check.RemFood("рыба 100 100 100")
+	if len(p) != 0 {
+		o.RemFood(p...)
+	} else {
+	}
 }
