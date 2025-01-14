@@ -118,33 +118,52 @@ func In(msg string) string {
 	if len(got) > 1 {
 		i.data = got[1]
 	}
-	func(i I) {
-		switch i.req {
-		case 'r' + 'w':
-			//rem weight
-			fmt.Println("!")
-			weight := check.RemWeight(i.data)
-			_ = weight
-		case 'm' + 'w':
-			// mem weight
 
-		case 'r' + 'f':
-			//rem prod/food
-
-		case 'r' + 'R':
-			//rem rate
-
-		case 'm' + 'R':
-			//mem rate
-
-		case 'r' + 'm':
-			//rem meal
-
-		case 'm' + 'm':
-			//mem meal
-
+	switch i.req {
+	case 'r' + 'w':
+		//
+		weight := check.RemWeight(i.data)
+		if weight == nil {
+			return "(check.RemWeight==nil)\nОдин раз - не пидорас.\nНо, Братан, ты пидр!\nДавай! Попробуй еще раз!"
+		} else {
+			//RemWeight(weight)
 		}
-	}(*i)
+	case 'm' + 'w':
+		// mem weight
+
+	case 'r' + 'f':
+		//
+		food := check.RemFood(i.data)
+		if len(food) == 0 {
+			return "(check.RemFood==len_0)\nОдин раз - не пидорас.\nНо, Братан, ты пидр!\nДавай! Попробуй еще раз!"
+		} else {
+			//RemFood(food)
+		}
+	case 'r' + 'R':
+		//
+		rate := check.Rate(i.data)
+		if rate == nil {
+			return "(check.Rate==nil)\nОдин раз - не пидорас.\nНо, Братан, ты пидр!\nДавай! Попробуй еще раз!"
+		} else {
+			//RemRate(rate)
+		}
+
+	case 'm' + 'R':
+		//mem rate
+
+	case 'r' + 'm':
+		//
+		prod := check.Prod(i.data)
+		if len(prod) == 0 {
+			return "(check.Prod==len_0)\nОдин раз - не пидорас.\nНо, Братан, ты пидр!\nДавай! Попробуй еще раз!"
+		} else {
+			//RemMealTake
+		}
+	case 'm' + 'm':
+		//mem meal
+
+	}
+
 	return "in.In(msg) - mission complete, bro)"
 }
 

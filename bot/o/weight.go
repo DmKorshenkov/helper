@@ -21,8 +21,9 @@ func SetW(weight float64, info string) *Weight {
 	return &Weight{Weight: weight, Info: info}
 }
 
-func (w *Weight) SetWeight(weight float64) {
+func (w *Weight) SetWeight(weight float64) *Weight {
 	w.Weight = weight
+	return w
 }
 
 func (w *Weight) SetInfo(info string) {

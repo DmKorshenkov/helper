@@ -24,7 +24,7 @@ func Prod(data string) []o.Prod {
 			return nil
 		}
 		if o.MemFood(slStr[0]) == nil {
-			log.Println("CheckProd MemFood == nil")
+			log.Println("CheckProd MemFood == msg[i] not found in list foods")
 			return nil
 		}
 		weight, _ := strconv.ParseFloat(slStr[1], 64)
